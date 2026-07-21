@@ -3,91 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#124a96" />
+  <meta name="theme-color" content="#102a43" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Hanoi" />
+  <meta name="apple-mobile-web-app-title" content="Brain Training" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icon-180.png" />
-  <title>Torre di Hanoi</title>
+  <title>Brain Training Suite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="app">
-    <header class="topbar">
-      <div>
-        <h1>Torre di Hanoi</h1>
-        <p>Allenamento logico e cognitivo</p>
-      </div>
-      <button id="fullscreenBtn" class="secondary">Schermo intero</button>
-    </header>
+    <section id="homeScreen" class="screen active">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Allenamento cognitivo</p>
+          <h1>Brain Training Suite</h1>
+          <p>Una raccolta di esercizi per logica, memoria, attenzione e velocità di risposta.</p>
+        </div>
+        <button id="fullscreenBtn" class="secondary">Schermo intero</button>
+      </header>
 
-    <section class="controls" aria-label="Controlli di gioco">
-      <label>
-        Dischi
-        <select id="diskCount">
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5" selected>5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </label>
-      <button id="newGameBtn">Nuova partita</button>
-      <button id="hintBtn" class="secondary">Suggerimento</button>
-      <button id="autoBtn" class="secondary">Soluzione automatica</button>
+      <section class="overview">
+        <article><span>Sessioni</span><strong id="totalSessions">0</strong></article>
+        <article><span>Giochi disponibili</span><strong>1</strong></article>
+        <article><span>In sviluppo</span><strong>4</strong></article>
+      </section>
+
+      <section class="game-grid" aria-label="Esercizi disponibili">
+        <button class="game-card available" data-game="hanoi">
+          <span class="game-icon">🎯</span><span><strong>Torre di Hanoi</strong><small>Logica e pianificazione</small></span><b>Gioca</b>
+        </button>
+        <button class="game-card locked"><span class="game-icon">🧩</span><span><strong>Torre di Londra</strong><small>Pianificazione sequenziale</small></span><b>Prossimamente</b></button>
+        <button class="game-card locked"><span class="game-icon">🧠</span><span><strong>Memoria visiva</strong><small>Ricordo di forme e posizioni</small></span><b>Prossimamente</b></button>
+        <button class="game-card locked"><span class="game-icon">🎨</span><span><strong>Stroop Test</strong><small>Attenzione e controllo inibitorio</small></span><b>Prossimamente</b></button>
+        <button class="game-card locked"><span class="game-icon">⚡</span><span><strong>Tempi di reazione</strong><small>Rapidità e precisione</small></span><b>Prossimamente</b></button>
+      </section>
+
+      <section id="installHelp" class="install-help" hidden>Su iPhone: apri in Safari, tocca <strong>Condividi</strong> e scegli <strong>Aggiungi alla schermata Home</strong>.</section>
     </section>
 
-    <section class="stats" aria-live="polite">
-      <div><span>Mosse</span><strong id="moves">0</strong></div>
-      <div><span>Tempo</span><strong id="time">00:00</strong></div>
-      <div><span>Minimo</span><strong id="minimum">31</strong></div>
-      <div><span>Migliore</span><strong id="best">—</strong></div>
+    <section id="hanoiScreen" class="screen">
+      <header class="topbar">
+        <div><button id="backBtn" class="secondary compact">← Home</button><h2>Torre di Hanoi</h2><p>Allenamento logico e cognitivo</p></div>
+      </header>
+
+      <section class="controls" aria-label="Controlli di gioco">
+        <label>Dischi<select id="diskCount"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
+        <button id="newGameBtn">Nuova partita</button>
+        <button id="hintBtn" class="secondary">Suggerimento</button>
+        <button id="autoBtn" class="secondary">Soluzione automatica</button>
+      </section>
+
+      <section class="stats" aria-live="polite">
+        <div><span>Mosse</span><strong id="moves">0</strong></div><div><span>Tempo</span><strong id="time">00:00</strong></div><div><span>Minimo</span><strong id="minimum">31</strong></div><div><span>Migliore</span><strong id="best">—</strong></div>
+      </section>
+      <section id="message" class="message" aria-live="assertive"></section>
+      <section id="board" class="board" aria-label="Torre di Hanoi">
+        <button class="peg" aria-label="Piolo sinistro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+        <button class="peg" aria-label="Piolo centrale"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+        <button class="peg" aria-label="Piolo destro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+      </section>
+      <footer><p>Tocca prima il piolo di partenza e poi quello di destinazione.</p></footer>
     </section>
-
-    <section id="installHelp" class="install-help" hidden>
-      Su iPhone: apri questa pagina in Safari, tocca <strong>Condividi</strong> e scegli <strong>Aggiungi alla schermata Home</strong>.
-    </section>
-
-    <section id="message" class="message" aria-live="assertive"></section>
-
-    <section id="board" class="board" aria-label="Torre di Hanoi">
-      <button class="peg" data-peg="0" aria-label="Piolo sinistro">
-        <span class="rod"></span>
-        <span class="base"></span>
-        <span class="stack"></span>
-      </button>
-      <button class="peg" data-peg="1" aria-label="Piolo centrale">
-        <span class="rod"></span>
-        <span class="base"></span>
-        <span class="stack"></span>
-      </button>
-      <button class="peg" data-peg="2" aria-label="Piolo destro">
-        <span class="rod"></span>
-        <span class="base"></span>
-        <span class="stack"></span>
-      </button>
-    </section>
-
-    <footer>
-      <p>Clicca prima sul piolo di partenza e poi su quello di destinazione. Funziona anche su tablet e smartphone.</p>
-    </footer>
   </main>
 
-  <dialog id="winDialog">
-    <h2>Complimenti!</h2>
-    <p id="winText"></p>
-    <button id="closeDialog">Chiudi</button>
-  </dialog>
-
+  <dialog id="winDialog"><h2>Complimenti!</h2><p id="winText"></p><button id="closeDialog">Chiudi</button></dialog>
   <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
-    }
-  </script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));</script>
 </body>
 </html>
