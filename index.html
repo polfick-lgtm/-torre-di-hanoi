@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#124a96" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Hanoi" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <title>Torre di Hanoi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <h1>Torre di Hanoi</h1>
+        <p>Allenamento logico e cognitivo</p>
+      </div>
+      <button id="fullscreenBtn" class="secondary">Schermo intero</button>
+    </header>
+
+    <section class="controls" aria-label="Controlli di gioco">
+      <label>
+        Dischi
+        <select id="diskCount">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5" selected>5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </label>
+      <button id="newGameBtn">Nuova partita</button>
+      <button id="hintBtn" class="secondary">Suggerimento</button>
+      <button id="autoBtn" class="secondary">Soluzione automatica</button>
+    </section>
+
+    <section class="stats" aria-live="polite">
+      <div><span>Mosse</span><strong id="moves">0</strong></div>
+      <div><span>Tempo</span><strong id="time">00:00</strong></div>
+      <div><span>Minimo</span><strong id="minimum">31</strong></div>
+      <div><span>Migliore</span><strong id="best">—</strong></div>
+    </section>
+
+    <section id="installHelp" class="install-help" hidden>
+      Su iPhone: apri questa pagina in Safari, tocca <strong>Condividi</strong> e scegli <strong>Aggiungi alla schermata Home</strong>.
+    </section>
+
+    <section id="message" class="message" aria-live="assertive"></section>
+
+    <section id="board" class="board" aria-label="Torre di Hanoi">
+      <button class="peg" data-peg="0" aria-label="Piolo sinistro">
+        <span class="rod"></span>
+        <span class="base"></span>
+        <span class="stack"></span>
+      </button>
+      <button class="peg" data-peg="1" aria-label="Piolo centrale">
+        <span class="rod"></span>
+        <span class="base"></span>
+        <span class="stack"></span>
+      </button>
+      <button class="peg" data-peg="2" aria-label="Piolo destro">
+        <span class="rod"></span>
+        <span class="base"></span>
+        <span class="stack"></span>
+      </button>
+    </section>
+
+    <footer>
+      <p>Clicca prima sul piolo di partenza e poi su quello di destinazione. Funziona anche su tablet e smartphone.</p>
+    </footer>
+  </main>
+
+  <dialog id="winDialog">
+    <h2>Complimenti!</h2>
+    <p id="winText"></p>
+    <button id="closeDialog">Chiudi</button>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+    }
+  </script>
+</body>
+</html>
