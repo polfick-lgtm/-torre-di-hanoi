@@ -1,0 +1,51 @@
+:root {
+  --bg1: #0b2f6f;
+  --bg2: #1767c6;
+  --panel: rgba(255, 255, 255, 0.12);
+  --text: #ffffff;
+  --accent: #ffd43b;
+  --danger: #ff5252;
+  --ok: #38d996;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: radial-gradient(circle at top, #3f7eff 0%, var(--bg2) 35%, var(--bg1) 100%); }
+button, select { font: inherit; }
+button { cursor: pointer; }
+.app { width: min(1180px, 96vw); margin: 0 auto; padding: 24px 0 30px; }
+.topbar, .controls, .stats { display: flex; align-items: center; gap: 16px; }
+.topbar { justify-content: space-between; }
+h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
+.topbar p { margin: 6px 0 0; opacity: .85; }
+.controls { margin: 20px 0 14px; flex-wrap: wrap; background: var(--panel); padding: 14px; border-radius: 16px; backdrop-filter: blur(10px); }
+.controls label { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+select, button { border: 0; border-radius: 10px; padding: 11px 16px; }
+button { background: var(--accent); color: #18244a; font-weight: 800; }
+button.secondary { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.28); }
+button:focus-visible { outline: 4px solid rgba(255,255,255,.65); outline-offset: 2px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(100px, 1fr)); gap: 10px; }
+.stats div { text-align: center; background: rgba(3,20,60,.35); padding: 12px; border-radius: 14px; }
+.stats span { display: block; opacity: .8; font-size: .88rem; }
+.stats strong { display: block; margin-top: 4px; font-size: 1.4rem; }
+.message { min-height: 44px; margin: 12px 0 4px; display: grid; place-items: center; font-weight: 800; font-size: 1.1rem; }
+.message.error { color: #ffe2e2; }
+.message.ok { color: #caffeb; }
+.board { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); align-items: end; gap: 12px; min-height: 500px; padding: 24px 14px 34px; border-radius: 24px; background: linear-gradient(#5dcf3c 0%, #36a81f 100%); box-shadow: inset 0 0 0 3px rgba(255,255,255,.15), 0 25px 80px rgba(0,0,0,.25); overflow: hidden; }
+.peg { position: relative; height: 430px; background: transparent; padding: 0; min-width: 0; }
+.rod { position: absolute; width: 18px; height: 330px; left: 50%; bottom: 55px; transform: translateX(-50%); border-radius: 12px 12px 4px 4px; background: linear-gradient(90deg, #7f8792, #f0f4f8 47%, #9ba4ae); box-shadow: 0 3px 8px rgba(0,0,0,.35); }
+.base { position: absolute; left: 6%; right: 6%; bottom: 32px; height: 28px; border-radius: 10px; background: linear-gradient(#edf2f5, #8a939d); box-shadow: 0 6px 8px rgba(0,0,0,.28); }
+.stack { position: absolute; left: 0; right: 0; bottom: 59px; display: flex; flex-direction: column-reverse; align-items: center; gap: 4px; pointer-events: none; }
+.disk { height: clamp(24px, 4.5vw, 38px); border-radius: 9px; box-shadow: inset 0 4px 4px rgba(255,255,255,.35), inset 0 -5px 5px rgba(0,0,0,.2), 0 4px 6px rgba(0,0,0,.28); transition: transform .18s ease, filter .18s ease; }
+.peg.selected .rod { filter: drop-shadow(0 0 10px #fff); }
+.peg.selected .disk:last-child { transform: translateY(-18px); filter: brightness(1.18); }
+.peg.hint { animation: pulse .8s ease 2; }
+@keyframes pulse { 50% { transform: scale(1.03); filter: brightness(1.25); } }
+footer { text-align: center; opacity: .82; }
+dialog { border: 0; border-radius: 18px; padding: 28px; width: min(420px, 90vw); text-align: center; }
+dialog::backdrop { background: rgba(0,0,0,.62); }
+@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } .board { min-height: 410px; } .peg { height: 350px; } .rod { height: 260px; } .controls button { flex: 1 1 46%; } .topbar { align-items: flex-start; } }
+.install-help { margin: 12px 0; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.16); line-height: 1.45; }
+html, body { overscroll-behavior: none; }
+body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+.peg, button, select { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (display-mode: standalone) { #installHelp, #fullscreenBtn { display: none !important; } .app { padding-top: 12px; } }
