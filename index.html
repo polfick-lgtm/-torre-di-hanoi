@@ -2,73 +2,130 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#102a43" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Brain Training" />
+  <meta name="description" content="Brain Training Suite: esercizi cognitivi, progressi e allenamenti personalizzati." />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icon-180.png" />
-  <title>Brain Training Suite</title>
   <link rel="stylesheet" href="style.css" />
+  <title>Brain Training Suite</title>
 </head>
 <body>
-  <main class="app">
-    <section id="homeScreen" class="screen active">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">Allenamento cognitivo</p>
-          <h1>Brain Training Suite</h1>
-          <p>Una raccolta di esercizi per logica, memoria, attenzione e velocità di risposta.</p>
-        </div>
-        <button id="fullscreenBtn" class="secondary">Schermo intero</button>
-      </header>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigazione principale">
+      <button class="brand" data-screen="home" aria-label="Vai alla home">
+        <span class="brand-mark">🧠</span>
+        <span><strong>Brain Training</strong><small>Suite</small></span>
+      </button>
+      <nav>
+        <button class="nav-item active" data-screen="home"><span>⌂</span> Home</button>
+        <button class="nav-item" data-screen="progress"><span>↗</span> Progressi</button>
+        <button class="nav-item" data-screen="profile"><span>♙</span> Profilo</button>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="version">v0.1 Foundation</span>
+        <button id="fullscreenBtn" class="ghost compact">Schermo intero</button>
+      </div>
+    </aside>
 
-      <section class="overview">
-        <article><span>Sessioni</span><strong id="totalSessions">0</strong></article>
-        <article><span>Giochi disponibili</span><strong>1</strong></article>
-        <article><span>In sviluppo</span><strong>4</strong></article>
+    <main class="main-content">
+      <section id="homeScreen" class="screen active">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">Allenamento cognitivo</p>
+            <h1 id="welcomeTitle">Bentornato</h1>
+            <p>Ogni grande miglioramento inizia con un piccolo allenamento.</p>
+          </div>
+          <div class="streak-pill"><span>🔥</span><strong id="streakValue">0</strong><small>giorni</small></div>
+        </header>
+
+        <section class="hero-card">
+          <div>
+            <span class="badge">Sessione consigliata</span>
+            <h2>Allena logica e pianificazione</h2>
+            <p>Completa una partita alla Torre di Hanoi. Il livello suggerito è basato sulle tue ultime prestazioni.</p>
+            <button id="startRecommendedBtn" class="primary">Inizia allenamento</button>
+          </div>
+          <div class="hero-visual" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div>
+        </section>
+
+        <section class="summary-grid" aria-label="Riepilogo attività">
+          <article><span>Sessioni totali</span><strong id="totalSessions">0</strong><small>allenamenti completati</small></article>
+          <article><span>Tempo totale</span><strong id="totalTime">0 min</strong><small>dedicato alla mente</small></article>
+          <article><span>Efficienza media</span><strong id="averageEfficiency">—</strong><small>mosse rispetto al minimo</small></article>
+          <article><span>Miglior serie</span><strong id="bestStreak">0</strong><small>giorni consecutivi</small></article>
+        </section>
+
+        <div class="section-heading"><div><p class="eyebrow">Esercizi</p><h2>Scegli il tuo allenamento</h2></div></div>
+        <section class="game-grid" aria-label="Esercizi disponibili">
+          <button class="game-card available" data-game="hanoi">
+            <span class="game-icon logic">🎯</span>
+            <span class="game-copy"><strong>Torre di Hanoi</strong><small>Logica e pianificazione</small><em>Disponibile</em></span>
+            <b>→</b>
+          </button>
+          <button class="game-card locked" disabled><span class="game-icon">🧩</span><span class="game-copy"><strong>Torre di Londra</strong><small>Pianificazione sequenziale</small><em>In sviluppo</em></span></button>
+          <button class="game-card locked" disabled><span class="game-icon">🧠</span><span class="game-copy"><strong>Memoria visiva</strong><small>Ricordo di forme e posizioni</small><em>In sviluppo</em></span></button>
+          <button class="game-card locked" disabled><span class="game-icon">🎨</span><span class="game-copy"><strong>Stroop Test</strong><small>Attenzione e controllo inibitorio</small><em>In sviluppo</em></span></button>
+          <button class="game-card locked" disabled><span class="game-icon">⚡</span><span class="game-copy"><strong>Tempi di reazione</strong><small>Rapidità e precisione</small><em>In sviluppo</em></span></button>
+          <button class="game-card locked" disabled><span class="game-icon">✏️</span><span class="game-copy"><strong>Trail Making</strong><small>Flessibilità e attenzione</small><em>In sviluppo</em></span></button>
+        </section>
+
+        <section id="installHelp" class="install-help" hidden>Su iPhone apri il sito in Safari, tocca <strong>Condividi</strong> e scegli <strong>Aggiungi alla schermata Home</strong>.</section>
       </section>
 
-      <section class="game-grid" aria-label="Esercizi disponibili">
-        <button class="game-card available" data-game="hanoi">
-          <span class="game-icon">🎯</span><span><strong>Torre di Hanoi</strong><small>Logica e pianificazione</small></span><b>Gioca</b>
-        </button>
-        <button class="game-card locked"><span class="game-icon">🧩</span><span><strong>Torre di Londra</strong><small>Pianificazione sequenziale</small></span><b>Prossimamente</b></button>
-        <button class="game-card locked"><span class="game-icon">🧠</span><span><strong>Memoria visiva</strong><small>Ricordo di forme e posizioni</small></span><b>Prossimamente</b></button>
-        <button class="game-card locked"><span class="game-icon">🎨</span><span><strong>Stroop Test</strong><small>Attenzione e controllo inibitorio</small></span><b>Prossimamente</b></button>
-        <button class="game-card locked"><span class="game-icon">⚡</span><span><strong>Tempi di reazione</strong><small>Rapidità e precisione</small></span><b>Prossimamente</b></button>
+      <section id="hanoiScreen" class="screen">
+        <header class="page-header compact-header">
+          <div><button class="back-link" data-screen="home">← Torna alla home</button><p class="eyebrow">Logica e pianificazione</p><h1>Torre di Hanoi</h1><p>Sposta tutti i dischi sul piolo destro rispettando le regole.</p></div>
+        </header>
+        <section class="game-toolbar">
+          <label>Dischi<select id="diskCount"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
+          <button id="newGameBtn" class="primary">Nuova partita</button>
+          <button id="hintBtn" class="secondary">Suggerimento</button>
+          <button id="autoBtn" class="secondary">Soluzione automatica</button>
+        </section>
+        <section class="stats" aria-live="polite">
+          <div><span>Mosse</span><strong id="moves">0</strong></div><div><span>Tempo</span><strong id="time">00:00</strong></div><div><span>Minimo</span><strong id="minimum">31</strong></div><div><span>Migliore</span><strong id="best">—</strong></div>
+        </section>
+        <section id="message" class="message" aria-live="assertive"></section>
+        <section id="board" class="board" aria-label="Torre di Hanoi">
+          <button class="peg" aria-label="Piolo sinistro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+          <button class="peg" aria-label="Piolo centrale"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+          <button class="peg" aria-label="Piolo destro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
+        </section>
+        <p class="game-help">Tocca prima il piolo di partenza e poi quello di destinazione.</p>
       </section>
 
-      <section id="installHelp" class="install-help" hidden>Su iPhone: apri in Safari, tocca <strong>Condividi</strong> e scegli <strong>Aggiungi alla schermata Home</strong>.</section>
-    </section>
-
-    <section id="hanoiScreen" class="screen">
-      <header class="topbar">
-        <div><button id="backBtn" class="secondary compact">← Home</button><h2>Torre di Hanoi</h2><p>Allenamento logico e cognitivo</p></div>
-      </header>
-
-      <section class="controls" aria-label="Controlli di gioco">
-        <label>Dischi<select id="diskCount"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
-        <button id="newGameBtn">Nuova partita</button>
-        <button id="hintBtn" class="secondary">Suggerimento</button>
-        <button id="autoBtn" class="secondary">Soluzione automatica</button>
+      <section id="progressScreen" class="screen">
+        <header class="page-header"><div><p class="eyebrow">La mia evoluzione</p><h1>Progressi</h1><p>Una lettura semplice e trasparente della tua attività.</p></div></header>
+        <section class="summary-grid progress-summary">
+          <article><span>Partite completate</span><strong id="progressSessions">0</strong></article>
+          <article><span>Miglior efficienza</span><strong id="bestEfficiency">—</strong></article>
+          <article><span>Tempo medio</span><strong id="averageTime">—</strong></article>
+          <article><span>Livello più alto</span><strong id="highestLevel">—</strong></article>
+        </section>
+        <section class="panel">
+          <div class="section-heading"><div><p class="eyebrow">Cronologia</p><h2>Ultime sessioni</h2></div><button id="clearHistoryBtn" class="ghost danger">Cancella dati</button></div>
+          <div id="historyList" class="history-list"></div>
+        </section>
       </section>
 
-      <section class="stats" aria-live="polite">
-        <div><span>Mosse</span><strong id="moves">0</strong></div><div><span>Tempo</span><strong id="time">00:00</strong></div><div><span>Minimo</span><strong id="minimum">31</strong></div><div><span>Migliore</span><strong id="best">—</strong></div>
+      <section id="profileScreen" class="screen">
+        <header class="page-header"><div><p class="eyebrow">Preferenze personali</p><h1>Profilo</h1><p>I dati restano memorizzati esclusivamente su questo dispositivo.</p></div></header>
+        <section class="panel profile-panel">
+          <label>Nome visualizzato<input id="profileName" maxlength="30" placeholder="Inserisci il tuo nome" /></label>
+          <label>Livello iniziale consigliato<select id="preferredLevel"><option value="3">3 dischi</option><option value="4">4 dischi</option><option value="5">5 dischi</option><option value="6">6 dischi</option></select></label>
+          <button id="saveProfileBtn" class="primary">Salva profilo</button>
+          <p id="profileMessage" class="inline-message" aria-live="polite"></p>
+        </section>
+        <section class="privacy-card"><span>🔒</span><div><strong>Privacy per impostazione predefinita</strong><p>Nessun account obbligatorio, nessun tracciamento e nessun dato inviato a server esterni.</p></div></section>
       </section>
-      <section id="message" class="message" aria-live="assertive"></section>
-      <section id="board" class="board" aria-label="Torre di Hanoi">
-        <button class="peg" aria-label="Piolo sinistro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
-        <button class="peg" aria-label="Piolo centrale"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
-        <button class="peg" aria-label="Piolo destro"><span class="rod"></span><span class="base"></span><span class="stack"></span></button>
-      </section>
-      <footer><p>Tocca prima il piolo di partenza e poi quello di destinazione.</p></footer>
-    </section>
-  </main>
+    </main>
+  </div>
 
-  <dialog id="winDialog"><h2>Complimenti!</h2><p id="winText"></p><button id="closeDialog">Chiudi</button></dialog>
+  <dialog id="winDialog"><span class="dialog-icon">🏆</span><h2>Complimenti!</h2><p id="winText"></p><button id="closeDialog" class="primary">Continua</button></dialog>
   <script src="app.js"></script>
   <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));</script>
 </body>
